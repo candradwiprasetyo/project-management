@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #ccc
+}
+
+table thead tr th {
+  font-weight: bold;
+  background-color: #ccc;
+  padding: 10px 5px;
+}
+
+table tr td {
+  padding: 10px 5px;
+}
+
+.button, button {
+  color: #fff;
+  font-weight: bold;
+  padding: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: gray;
+}
+
+
+.button--blue {
+  background-color: blue;
+}
+
+.button--green {
+  background-color: green;
+}
+
+.button--red {
+  background-color: red;
+}
+
+.button--brown {
+  background-color: brown;
+}
+
+input {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+

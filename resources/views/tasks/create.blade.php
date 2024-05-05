@@ -1,4 +1,5 @@
-<h2>Add Task</h2>
+<link href="../../../css/style.css" rel="stylesheet" type="text/css">
+<div class="title">Create Task</div>
 
 <form action="{{ route('projects.tasks.store', $projectId) }}" method="POST">
     @csrf
@@ -13,5 +14,6 @@
         <textarea id="description" name="description" required></textarea>
     </div>
 
-    <button type="submit">Add Task</button>
+    <button type="submit" class="button button--blue">Add Task</button>
+    <a href="{{ route('projects.tasks.index', $projectId) }}" class="button button--red">Cancel</a>
 </form>

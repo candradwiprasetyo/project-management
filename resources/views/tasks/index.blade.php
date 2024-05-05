@@ -1,33 +1,49 @@
-<h2>Project: {{ $project->name }}</h2>
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+
+<div class="title">Detail Project Management</div>
+
+<p>Project: {{ $project->name }}</p>
 <p>Description: {{ $project->description }}</p>
 
 <h3>Tasks:</h3>
-<ul>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Config</th>
+        </tr>
+    </thead>
     @foreach ($project->tasks as $task)
-        <li>{{ $task->name }} - Status: {{ $task->status }}</li>
-        <form action="{{ route('tasks.update', $task->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('PUT')
-            <select name="status">
-                <option value="To Do" {{ $task->status == 'To Do' ? 'selected' : '' }}>To Do</option>
-                <option value="In Progress" {{ $task->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
-                <option value="Done" {{ $task->status == 'Done' ? 'selected' : '' }}>Done</option>
-            </select>
-            <button type="submit">Update Status</button>
-        </form>
-        <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
-        </form>
+        <tr>
+            <td>{{ $task->name }}</td>
+            <td>{{ $task->status }}</td>
+            <td>
+                <form action="{{ route('tasks.update', $task->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('PUT')
+                    <select name="status">
+                        <option value="To Do" {{ $task->status == 'To Do' ? 'selected' : '' }}>To Do</option>
+                        <option value="In Progress" {{ $task->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
+                        <option value="Done" {{ $task->status == 'Done' ? 'selected' : '' }}>Done</option>
+                    </select>
+                    <button type="submit" class="button button--green">Update Status</button>
+                </form>
+                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="button button--red" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+                </form>
+            </td>
+        </tr>
     @endforeach
-</ul>
+</table>
+<br>
+<a href="{{ route('projects.tasks.create', $project->id) }}" class="button button--blue">Add Task</a>
 
-<a href="{{ route('projects.tasks.create', $project->id) }}">Add Task</a>
-
-<a href="{{ route('projects.index') }}" class="btn btn-primary">Back to Projects</a>
-
-<canvas id="projectProgressChart" style="width: 200px; height: 200px"></canvas>
+<a href="{{ route('projects.index') }}" class="button button--red">Back to Projects</a>
+<br><br>
+<canvas id="projectProgressChart" style="width: 300px; height: 300px"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

@@ -19,9 +19,9 @@ class ProjectController extends Controller
         // Menambahkan status ke setiap proyek berdasarkan tanggal tenggat waktu
         foreach ($projects as $project) {
             if ($project->due_date <= now()->addDays(7)) {
-                $project->status = 'Proyek mendekati deadline';
+                $project->status = '<span style="color: red">Proyek mendekati deadline</span>';
             } else {
-                $project->status = '';
+                $project->status = '<span style="color: green">Sesuai jadwal</span>';
             }
         }
 
@@ -30,9 +30,9 @@ class ProjectController extends Controller
             $unfinishedTasks = $project->tasks()->where('status', '!=', 'Done')->count();
             if ($unfinishedTasks > 0) {
                 if ($project->status == '') {
-                    $project->status = 'Ada tugas yang belum selesai';
+                    $project->status = '<span style="color: red">Ada tugas yang belum selesai</span>';
                 } else {
-                    $project->status .= ' dan ada tugas yang belum selesai';
+                    $project->status .= ' <span style="color: red">dan ada tugas yang belum selesai</span>';
                 }
                 break; // Keluar dari loop jika telah menemukan proyek dengan tugas yang belum selesai
             }
